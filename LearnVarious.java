@@ -20,7 +20,7 @@ public class LearnVarious{
 
 		// System.out.printf("Hello KaKa!");
 
-		// int[] arrInt = new int[]{1,3,4,5};
+		// int[] arrInt = new int[]{1,3,4,5};  
 		int[] arrInt = {2,3,4,5,6};
 
 		// arrInt[5] = 12;
