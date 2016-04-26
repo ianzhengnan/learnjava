@@ -7,16 +7,18 @@ public class Player {
 	private Card[] cards = new Card[5];
 	private int money;
 	private int current;
+	private int position;
 
 	public Player(){
 
 	}
 
-	public Player(String name, int money){
+	public Player(String name, int money, int position){
 		this.name = name;
 		this.ps = PlayerStatus.WAITING;
 		this.money = money;
 		this.current = 0;
+		this.position = position;
 	}
 
 
@@ -42,11 +44,25 @@ public class Player {
 		this.cards = cards;
 	}
 
+	public Card getCard(int i){
+		return this.cards[i];
+	}
+	public void setCard(int i, Card card){
+		this.cards[i] = card;
+	}
+
 	public int getMoney(){
 		return this.money;
 	}
 	public void setMoney(int money){
 		this.money = money;
+	}
+
+	public int getPosition(){
+		return this.position;
+	}
+	public void setPosition(int position){
+		this.position = position;
 	}
 
 	// behaviors
@@ -58,15 +74,24 @@ public class Player {
 	}
 
 	public void follow(int pay){
+		if (this.ps == PlayerStatus.WAITING) {
+			return;
+		}
 		this.current += pay;
 		this.money -= this.current;
 	}
 
 	public void beyond(int pay){
+		if (this.ps == PlayerStatus.WAITING) {
+			return;
+		}
 		this.follow(pay);
 	}
 
 	public void showhand(){
+		if (this.ps == PlayerStatus.WAITING) {
+			return;
+		}
 		this.current = this.money;
 		this.money = 0;
 	}
