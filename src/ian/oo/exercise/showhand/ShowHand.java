@@ -13,6 +13,7 @@ public class ShowHand {
 	// create 28 cards for play
 	public void createCards(){
 
+		// create a non-sequence 28 cards
 		cards[0] = new Card(CardType.SPADE, "A");
 		cards[1] = new Card(CardType.SPADE, "10");
 		cards[2] = new Card(CardType.HEART, "J");
@@ -20,9 +21,11 @@ public class ShowHand {
 		cards[4] = new Card(CardType.DIAMOND, "Q");
 
 	}
-	// get a random card and pop it from cards pool
-	private Card getOneCard(int i){
-		return cards[i];
+	// get the top card of all cards and pop it from cards pool
+	private Card getOneCard(){
+		Card top = cards[cards.length - 1];
+		
+		return top;
 	}
 
 	// setup showhand
@@ -49,7 +52,7 @@ public class ShowHand {
 			for (int j = 0; j < 5 ; j++) {
 
 				if (players[i].getCard(j) == null) {
-					players[i].setCard(j, getOneCard(i));
+					players[i].setCard(j, getOneCard());
 					break;
 				}
 			}
