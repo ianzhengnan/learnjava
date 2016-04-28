@@ -95,14 +95,22 @@ public class ShowHand {
 
 	public void showStatus(){
 
-		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
+		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 
 		for(int i = 0; i < 5; i++){
-			System.out.print(players[i].getName() + "----->" + "剩余金额：" + players[i].getMoney() + "  当前下注：" + players[i].getCurrent());
+			System.out.print(players[i].getName() + "----->" + 
+				"剩余金额：" + players[i].getMoney() + 
+				"  当前下注：" + players[i].getCurrent());
+			if (players[i].getPs() == PlayerStatus.WAITING) {
+				System.out.print("  状态：退出");
+			}else{
+				System.out.print("  状态：正在玩");
+			}
 			System.out.println();
+			
 		}
 
-		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
+		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 
 		for(int i = 0; i < 5; i++){
 			System.out.print(players[i].getName() + "----->" + "当前牌面：");
@@ -117,7 +125,14 @@ public class ShowHand {
 
 	}
 
-
+	public static void help(){
+		System.out.println("Usage:");
+		System.out.println("new--->start a new round.");
+		System.out.println("bet--->bet the game.");
+		System.out.println("send-->send cards.");
+		System.out.println("show-->show status.");
+		System.out.println("quit-->quit the game.");
+	}
 
 	public static void main(String[] args){
 
@@ -156,7 +171,7 @@ public class ShowHand {
 					for (int i = 0; i < 5 ; i++) {
 						System.out.print(sh.players[i].getName() + ">>>");
 						bet = scBet.nextInt();
-						if (bet == 0) {
+						if (bet <= 0) {
 							sh.players[i].quit();
 						}
 						sh.players[i].follow(bet);
@@ -164,13 +179,7 @@ public class ShowHand {
 					System.out.print(">>>");
 					break;
 				case "help":
-					System.out.println("Usage:");
-					System.out.println("new--->start a new round.");
-					System.out.println("bet--->bet the game.");
-					System.out.println("send-->send cards.");
-					System.out.println("show-->show status.");
-					System.out.println("quit-->quit the game.");
-					// System.out.print(">>>");
+					help();
 
 				default:
 					System.out.print(">>>");
