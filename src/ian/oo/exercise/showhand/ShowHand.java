@@ -163,6 +163,17 @@ public class ShowHand {
 					}
 					System.out.print(">>>");
 					break;
+				case "help":
+					System.out.println("Usage:");
+					System.out.println("new--->start a new round.");
+					System.out.println("bet--->bet the game.");
+					System.out.println("send-->send cards.");
+					System.out.println("show-->show status.");
+					System.out.println("quit-->quit the game.");
+					// System.out.print(">>>");
+
+				default:
+					System.out.print(">>>");
 			}
 
 
