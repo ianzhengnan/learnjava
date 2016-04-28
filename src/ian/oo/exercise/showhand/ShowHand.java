@@ -1,12 +1,14 @@
 package ian.oo.exercise.showhand;
 
+import java.util.Random;
+import java.util.Scanner;
+
 public class ShowHand {
 
 	private Player[] players = new Player[5];
 	private Card[] cards = new Card[28];
-
+	private int current = 27;
 	// getters and setters
-
 
 
 
@@ -14,23 +16,38 @@ public class ShowHand {
 	public void createCards(){
 
 		// create a non-sequence 28 cards
-		cards[0] = new Card(CardType.SPADE, "A");
-		cards[1] = new Card(CardType.SPADE, "10");
-		cards[2] = new Card(CardType.HEART, "J");
-		cards[3] = new Card(CardType.CLUB, "K");
-		cards[4] = new Card(CardType.DIAMOND, "Q");
+		Random r = new Random();
 
+		CardType[] ct = new CardType[]{CardType.SPADE, CardType.HEART, CardType.CLUB, CardType.DIAMOND};
+		String[] ids = new String[]{"8", "9", "10", "J", "Q", "K", "A"};
+
+		for(int i = 0; i < ct.length; i++ ){
+			for(int j = 0; j < ids.length; j++){
+
+				int index = 0;
+				while(1 < 2){
+					index = r.nextInt(28);
+					if (cards[index] == null) {
+						break;
+					}
+				}
+				cards[index] = new Card(ct[i], ids[j]);
+			}
+		}
 	}
 	// get the top card of all cards and pop it from cards pool
 	private Card getOneCard(){
-		Card top = cards[cards.length - 1];
-		
+		Card top = null;
+		if (current >= 0) {
+			top = cards[current--];
+		}
 		return top;
 	}
 
 	// setup showhand
 	public void setup(){
-		players[0] = new Player("郑楠", 1000, 0);
+
+		players[0] = new Player("小郑", 1000, 0);
 		players[1] = new Player("小明", 1000, 1);
 		players[2] = new Player("小张", 1000, 2);
 		players[3] = new Player("小李", 1000, 3);
@@ -40,6 +57,7 @@ public class ShowHand {
 			players[i].setPs(PlayerStatus.PLAYING);
 		}
 		createCards();
+
 	}
 	// send a card to every players
 	public void sendCard(){
@@ -75,12 +93,82 @@ public class ShowHand {
 	}
 
 
+	public void showStatus(){
+
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
+
+		for(int i = 0; i < 5; i++){
+			System.out.print(players[i].getName() + "----->" + "剩余金额：" + players[i].getMoney() + "  当前下注：" + players[i].getCurrent());
+			System.out.println();
+		}
+
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
+
+		for(int i = 0; i < 5; i++){
+			System.out.print(players[i].getName() + "----->" + "当前牌面：");
+			for(int j = 0; j < players[i].getCards().length; j++){
+				if (players[i].getCards()[j] != null) {
+					Card card = players[i].getCards()[j];
+					System.out.print(card.getCt().getName() + card.getCardId() + "  ");
+				}
+			}
+			System.out.println();
+		}
+
+	}
+
+
+
 	public static void main(String[] args){
 
 		ShowHand sh = new ShowHand();
 		sh.setup();
-		sh.sendCard();
-		sh.showPlayers();
+
+		Scanner sc = new Scanner(System.in);
+		Scanner scBet = new Scanner(System.in);
+
+		System.out.print(">>>");
+		String cmd = "";
+		while(sc.hasNextLine()){
+			
+			cmd = sc.nextLine();
+			switch(cmd){
+
+				case "show":
+					sh.showStatus();
+					System.out.print(">>>");
+					break;
+				case "quit":
+					return;
+				case "send":
+					sh.sendCard();
+					System.out.println("Cards are sent.");
+					System.out.print(">>>");
+					break;
+				case "new":
+					sh = new ShowHand();
+					sh.setup();
+					System.out.println("This is a new round. Please enjoy!");
+					System.out.print(">>>");
+					break;
+				case "bet":
+					int bet = 0;
+					for (int i = 0; i < 5 ; i++) {
+						System.out.print(sh.players[i].getName() + ">>>");
+						bet = scBet.nextInt();
+						if (bet == 0) {
+							sh.players[i].quit();
+						}
+						sh.players[i].follow(bet);
+					}
+					System.out.print(">>>");
+					break;
+			}
+
+
+		}
+
+
 
 	}
 

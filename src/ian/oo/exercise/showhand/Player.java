@@ -58,6 +58,13 @@ public class Player {
 		this.money = money;
 	}
 
+	public int getCurrent(){
+		return this.current;
+	}
+	public void setCurrent(int current){
+		this.current = current;
+	}
+
 	public int getPosition(){
 		return this.position;
 	}
@@ -77,12 +84,22 @@ public class Player {
 		if (this.ps == PlayerStatus.WAITING) {
 			return;
 		}
+		if ((this.current + pay) > this.money) {
+			System.out.println("You don't have enough money to follow!");
+			// System.our.println(">>>");
+			return;
+		}
 		this.current += pay;
 		this.money -= this.current;
 	}
 
 	public void beyond(int pay){
 		if (this.ps == PlayerStatus.WAITING) {
+			return;
+		}
+		if ((this.current + pay) > this.money) {
+			System.out.println("You don't have enough money to beyond!");
+			// System.our.println(">>>");
 			return;
 		}
 		this.follow(pay);
