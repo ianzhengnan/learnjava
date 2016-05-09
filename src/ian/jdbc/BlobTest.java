@@ -50,7 +50,7 @@ public class BlobTest{
 			String user = props.getProperty("user");
 			String pass = props.getProperty("password");
 
-			Class.forName(driver);
+			Class.forName("driver");
 
 			conn = DriverManager.getConnection(url, user, pass);
 
