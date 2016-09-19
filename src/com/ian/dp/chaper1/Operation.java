@@ -1,4 +1,4 @@
-package com.ian.dp.chapter1;
+package com.ian.dp.chaper1;
 
 
 public class Operation{
