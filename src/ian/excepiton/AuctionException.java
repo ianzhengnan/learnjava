@@ -1,4 +1,4 @@
-package ian.exception;
+package ian.excepiton;
 
 public class AuctionException extends Exception{
 

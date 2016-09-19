@@ -1,4 +1,4 @@
-package ian.exception;
+package ian.excepiton;
 
 import java.io.BufferedReader;
 import java.io.PrintStream;
