@@ -1,7 +1,7 @@
 package com.ian.dp.chaper1;
 
 
-public class Operation{
+public abstract class Operation{
 
 	private double numberA = 0;
 	private double numberB = 0;
@@ -20,7 +20,5 @@ public class Operation{
 		this.numberB = numberB;
 	}
 
-	public double getResult(){
-		return 0;
-	}
+	public abstract double getResult();
 }
