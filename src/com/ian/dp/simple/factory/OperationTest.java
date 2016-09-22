@@ -1,4 +1,4 @@
-package com.ian.dp.chaper1;
+package com.ian.dp.simple.factory;
 
 
 public class OperationTest{
