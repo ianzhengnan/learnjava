@@ -18,9 +18,9 @@ public class CharsetTransform{
 		CharsetDecoder cnDecoder = cn.newDecoder();
 
 		CharBuffer cbuff = CharBuffer.allocate(8);
-		cbuff.put('孙');
-		cbuff.put('悟');
-		cbuff.put('空');
+		cbuff.put("");
+		cbuff.put("");
+		cbuff.put("");
 		cbuff.flip();
 
 		ByteBuffer bbuff = cnEncoder.encode(cbuff);
@@ -29,7 +29,7 @@ public class CharsetTransform{
 		}
 		System.out.println("\n" + cnDecoder.decode(bbuff));
 
-		ByteBuffer sBuff = cn.encode("你是我的小啊小苹果");
+		ByteBuffer sBuff = cn.encode("浣犳槸鎴戠殑灏忓晩灏忚嫻鏋�");
 		System.out.println("\n" + sBuff);
 		System.out.println("\n" + cnDecoder.decode(sBuff));
 
