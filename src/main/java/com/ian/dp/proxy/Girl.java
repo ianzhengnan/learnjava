@@ -5,7 +5,7 @@ public class Girl {
 	private String name;
 	
 	public Girl() {
-		
+
 	}
 	
 	public Girl(String name){
